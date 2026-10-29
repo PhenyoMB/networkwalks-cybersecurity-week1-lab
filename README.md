@@ -71,6 +71,10 @@ Attach Kali Linux and any subsequent target virtual machines to this network.
 
 **Purpose:** A common virtual network allows lab machines to communicate with each other while using VirtualBox NAT networking for external connectivity.
 
+**Reference screenshot — creating the NAT Network:**
+
+![VirtualBox NAT Network creation settings](<1. Creating the NatNetwork.png>)
+
 > **Security consideration:** NAT networking is not equivalent to complete isolation. Verify the actual network configuration and avoid connecting vulnerable lab targets to production networks or exposing their services unnecessarily.
 
 #### Step 3: Download and import Kali Linux
@@ -80,6 +84,10 @@ Download a Kali Linux virtual-machine image from the official source and import 
 - [Kali Linux Downloads](https://www.kali.org/get-kali/)
 
 Configure the VM's network adapter to use the custom NAT Network created in Step 2.
+
+**Reference screenshot — selecting the correct network adapter:**
+
+![VirtualBox network adapter configuration](<2. Ensuring it uses the right adapter.png>)
 
 **Purpose:** Kali Linux serves as the primary machine for security testing and subsequent hands-on exercises.
 
@@ -99,6 +107,12 @@ The NetworkWalks reference material suggests trying `10.0.0.1` if internet conne
 
 **Purpose:** A predictable IP address simplifies connectivity testing and helps identify the attacking machine during later exercises.
 
+**Reference screenshot — DNS server settings:**
+
+![DNS server configuration](<3. Set DNS Servers .png>)
+
+Use this image as a reference for the DNS settings shown in the lab. Confirm the values against your current network configuration before applying them.
+
 #### Step 5: Enable virtual-machine integration features
 
 Configure the Kali Linux VM to enable the integration features required by the lab:
@@ -111,11 +125,19 @@ Configure the Kali Linux VM to enable the integration features required by the l
 
 Only share directories that are necessary for the exercises. Avoid placing sensitive documents or credentials in a folder accessible to potentially compromised lab machines.
 
+**Reference screenshot — shared folder configuration:**
+
+![VirtualBox shared folder settings](<4. Shared Folder .png>)
+
 #### Step 6: Create a virtual-machine snapshot
 
 Create a snapshot of the Kali Linux VM after completing the initial configuration.
 
 **Purpose:** A snapshot provides a recovery point that can be used to return the machine to its initial lab state after configuration changes or later exercises.
+
+**Reference screenshot — VM snapshot:**
+
+![Virtual machine snapshot](<5. Snapshot of VM.png>)
 
 ### Phase 2: Network connectivity troubleshooting
 
@@ -160,6 +182,10 @@ The NetworkWalks exercise proposes installing additional virtual machines for fu
 
 Potential targets listed in the reference architecture include Windows 10, Windows 7, Windows Server 2016, and Android virtual machines.
 
+**Reference screenshot — Android VM network configuration:**
+
+![Android virtual machine network configuration](<6. Android Config.png>)
+
 For each additional VM:
 
 1. Attach the VM to the custom NAT Network.
@@ -170,6 +196,21 @@ For each additional VM:
 **Purpose:** Multiple virtual machines provide a controlled environment for future network discovery, vulnerability assessment, and authorised security testing.
 
 These are preparatory steps. No target enumeration, exploitation, or post-exploitation results are documented in this lab.
+
+#### Known issue: Android and Kali connectivity
+
+**Status: unresolved — follow-up task.** I was not able to successfully ping the Android virtual machine from Kali Linux, or establish the expected ping connectivity between the Android and Kali machines. The network configuration still needs to be investigated, so this README does not claim that inter-VM connectivity is working.
+
+**Troubleshooting plan for a future session:**
+
+1. Confirm both VMs are powered on and their virtual network adapters are connected to the same intended VirtualBox network.
+2. Check each VM's current IP address and subnet mask, and verify that the addresses are unique and within the intended subnet.
+3. Check the VirtualBox NAT Network settings and confirm the Android VM is attached to that NAT Network rather than a different adapter mode or network.
+4. Test connectivity in both directions and record the exact error or timeout behaviour.
+5. Check whether the Android environment or its firewall blocks ICMP echo requests; a failed ping alone does not prove that the VMs cannot communicate over other protocols.
+6. Re-test after any single configuration change and record the result, rather than assuming the issue is fixed.
+
+**Result to record later:** the Android and Kali IP addresses, their adapter/network settings, the exact ping commands and outputs, and any change that resolves the issue.
 
 ## 4. Key Findings and Configuration Considerations
 
@@ -228,7 +269,7 @@ Mark each item complete only after it has been configured and tested in the lab.
 - [ ] Clipboard and drag-and-drop settings configured.
 - [ ] Host `/downloads` directory shared with Kali Linux.
 - [ ] Internet connectivity tested.
-- [ ] Connectivity to other lab machines tested, if present.
+- [ ] Connectivity between Kali Linux and the Android VM verified. **Currently unresolved; follow-up required.**
 - [ ] Initial Kali Linux snapshot created.
 
 ## 7. Key Takeaways
