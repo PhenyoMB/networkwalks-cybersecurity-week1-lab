@@ -226,53 +226,7 @@ The principal technical considerations are:
 
 The troubleshooting procedure highlights that a connectivity issue does not necessarily indicate a security vulnerability. It may instead result from a virtual-network or configuration problem.
 
-## 5. Remediation and Defensive Considerations
-
-Although this lab does not identify a specific vulnerability, several security practices should be applied when building and maintaining a cybersecurity testing environment.
-
-### Network isolation
-
-- Use a dedicated virtual network for security testing.
-- Avoid exposing intentionally vulnerable target machines directly to the internet.
-- Review VirtualBox network-adapter settings and disable unnecessary bridged or additional network interfaces.
-- Verify that the configured network provides the intended level of separation.
-
-### Secure file sharing
-
-- Share only the directories required for the exercise.
-- Avoid exposing sensitive host files to guest virtual machines.
-- Disable clipboard sharing and drag-and-drop when they are no longer required.
-- Review shared-folder permissions and access requirements.
-
-### Virtual-machine maintenance
-
-- Keep the host operating system, VirtualBox, and Kali Linux appropriately updated.
-- Create snapshots before significant configuration changes or new exercises.
-- Maintain a clean baseline image for repeatable testing.
-- Use isolated, authorised targets for security assessments.
-
-### Network troubleshooting
-
-- Verify IP addresses, subnet masks, gateways, and DNS settings.
-- Check for duplicate IP addresses before changing network parameters.
-- Confirm that NetworkManager is managing the intended interface.
-- Apply configuration changes deliberately and verify connectivity afterward.
-
-## 6. Validation Checklist
-
-Mark each item complete only after it has been configured and tested in the lab.
-
-- [ ] VirtualBox installed.
-- [ ] Custom NAT Network configured with subnet `10.0.0.0/24`.
-- [ ] Kali Linux VM imported and configured.
-- [ ] Kali Linux assigned `10.0.0.2/24`.
-- [ ] Clipboard and drag-and-drop settings configured.
-- [ ] Host `/downloads` directory shared with Kali Linux.
-- [ ] Internet connectivity tested.
-- [ ] Connectivity between Kali Linux and the Android VM verified. **Currently unresolved; follow-up required.**
-- [ ] Initial Kali Linux snapshot created.
-
-## 7. Key Takeaways
+## 5. Key Takeaways
 
 This lab establishes the foundational infrastructure needed for subsequent cybersecurity practical exercises.
 
@@ -288,7 +242,7 @@ Key learning areas include:
 
 The configured environment is intended to provide a foundation for future hands-on exercises involving network reconnaissance, vulnerability assessment, and other security-testing techniques. The validation checklist above can be used to record which setup steps have actually been completed.
 
-## 8. References
+## 6. References
 
 - [NetworkWalks](https://networkwalks.com/) — Training platform and lab instructions.
 - [VirtualBox Downloads](https://www.virtualbox.org/wiki/Downloads) — Virtualisation software.
